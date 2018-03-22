@@ -2,14 +2,10 @@ import React from 'react';
 
 export default class Item extends React.Component {
     render() {
-        const company = { 
-            id: 1, 
-            name: 'company one' 
-        };
-
+        const { value } = this.props;
         return (
             <div className='item'>
-                {company.name}
+                {value.name}
             </div>
         );
     }
