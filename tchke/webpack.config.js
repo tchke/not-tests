@@ -1,8 +1,8 @@
 const path = require('path');
-//const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+    devtool: 'source-map',
     context: path.resolve(__dirname, "src/"),
     entry: ['./index.js'],
     output: {
@@ -36,42 +36,12 @@ module.exports = {
                         }
                     }
                 ]
-            },
-            // {
-            //     test: /\.scss$/,
-            //     use: ExtractTextPlugin.extract([
-            //         {
-            //             loader: 'css-loader',
-            //             options: { url: false }
-            //         },
-            //         {
-            //             loader: 'sass-loader'
-            //         }
-            //     ])
-            // },
-            // {
-            //     test: /\.(png|svg|jpg|gif)$/,
-            //     use: [
-            //         {
-            //             loader: 'file-loader',
-            //             options: {
-            //                 context: path.resolve(__dirname, "source/"),
-            //                 outputPath: path.resolve(__dirname, 'build/assets'),
-            //                 name: '[path][name].[ext]',
-            //                 publicPath: 'public/'
-            //             }
-            //         }
-            //     ]
-            // }
+            }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: "assets/index.html"
         })
-    //     new ExtractTextPlugin({
-    //         filename: '../css/style.css',
-    //         allChunks: true
-    //     })
     ]
 }
