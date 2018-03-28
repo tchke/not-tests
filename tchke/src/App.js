@@ -1,15 +1,36 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
-import Companies from './Components/Companies';
-import Company from './Components/Company';
+import List from './Components/List';
+import Item from './Components/Item';
+import NewItem from './Components/NewItem';
+import CompaniesStore from './Models/CompaniesStore';
 
 export default class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.store = new CompaniesStore();
+    }
+
     render() {
         return (
             <div>
-                <Route exact path='/' component={Companies} />
-                <Route exact path='/company/:id' component={Company} />
+                <Route exact path='/' render={this.renderCompanies} />
+                <Route exact path='/company/:id' render={this.renderCompany} />
+                <Route exact path='/newcompany' render={this.renderNewCompany} />
             </div>
         );
+    }
+
+    renderCompanies = () => {
+        return <List store={this.store} />;
+    }
+
+    renderCompany = ({ match }) => {
+        const { params } = match;   
+        return <Item store={this.store} id={params.id} />;
+    }
+
+    renderNewCompany = () => {
+        return <NewItem store={this.store} />
     }
 }
