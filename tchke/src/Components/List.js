@@ -25,6 +25,7 @@ export default class List extends React.Component {
         return (
             <li key={item.id}>
                 <Link to={`/company/${item.id}`}>{item.name}</Link>
+                <Link to={`/company/edit/${item.id}`}>Edit</Link>
             </li>
         );
     }

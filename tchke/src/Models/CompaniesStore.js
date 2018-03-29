@@ -21,4 +21,10 @@ export default class CompaniesStore {
     setCurrentCompanyId(id) {
         this.currentCompanyId = id;
     }
+
+    @action
+    updateCompany(company) {
+        const companyToUpdate = this.companies.find((v, i) => v.id === company.id);
+        companyToUpdate.name = company.name;
+    }
 }
