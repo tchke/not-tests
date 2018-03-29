@@ -5,16 +5,16 @@ export default class CompaniesStore {
 
     @observable companies = [];
 
-    @observable currentCompanyId = null
+    @observable currentCompanyId = null;
 
     @computed
     get currentCompany() {
-        return companies.find((v, i) => v.id === this.currentCompanyId);
+        return companies.find((v) => v.id === this.currentCompanyId);
     }
 
     @action 
     addCompany(name) {
-        this.companies.push({ id: this.counter++, name });
+        this.companies.push({ id: ++this.counter, name });
     }
 
     @action
@@ -24,7 +24,10 @@ export default class CompaniesStore {
 
     @action
     updateCompany(company) {
-        const companyToUpdate = this.companies.find((v, i) => v.id === company.id);
+        const companyToUpdate = this.companies.find((v) => v.id === company.id);
         companyToUpdate.name = company.name;
+        companyToUpdate.ogrn = company.ogrn;
+        companyToUpdate.type = company.type;
+        companyToUpdate.date = company.date;
     }
 }

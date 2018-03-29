@@ -1,18 +1,16 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import { Redirect } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 @observer
 export default class ItemEditor extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { };
-    }
-
     render() {
-        const { companyToEdit } = this.props.store;
+        const { model } = this.props;
 
-        if (!companyToEdit) {
+        if (!model.id) {
             return <Redirect to='/'/>
         }
 
@@ -21,7 +19,28 @@ export default class ItemEditor extends React.Component {
                 <div>
                     <div>Name</div>
                     <div>
-                        <input type='text' value={companyToEdit.name} onChange={this.handleNameChange} />
+                        <input type='text' value={model.name} onChange={this.handleNameChange} />
+                    </div>
+                </div>
+                <div>
+                    <div>OGRN</div>
+                    <div>
+                        <input type='text' value={model.ogrn} onChange={this.handleOgrnChange} />
+                    </div>
+                </div>
+                <div>
+                    <div>Type</div>
+                    <div>
+                        <select onChange={this.handleTypeChange} value={model.type}>
+                            <option key='ooo' value='ooo'>ooo</option>
+                            <option key='ip' value='ip'>ip</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div>Registration Date</div>
+                    <div>
+                        <DatePicker selected={model.momentDate} onChange={this.handleDateChange}/>
                     </div>
                 </div>
                 <button type='submit'>Save</button>
@@ -32,10 +51,21 @@ export default class ItemEditor extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.onDone();
-    }
+    };
 
     handleNameChange = (e) => {
-        const { companyToEdit } = this.props.store;
-        companyToEdit.name = e.target.value;
-    }
+        this.props.model.name = e.target.value;
+    };
+
+    handleOgrnChange = (e) => {
+        this.props.model.ogrn = e.target.value;
+    };
+
+    handleTypeChange = (e) => {
+        this.props.model.type = e.target.value;
+    };
+
+    handleDateChange = (date) => {
+        this.props.model.date = date.format();
+    };
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import clone from 'lodash.clone';
 
 import List from './Components/List';
@@ -14,7 +14,6 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.store = new CompaniesStore();
-        this.companyEditorStore = new CompanyEditorStore();
     }
 
     render() {
@@ -31,28 +30,32 @@ export default class App extends React.Component {
 
     renderCompanies = () => {
         return <List store={this.store} />;
-    }
+    };
 
     renderCompany = ({ match }) => {
         const { params } = match;   
         return <Item store={this.store} id={params.id} />;
-    }
+    };
 
     renderCompanyEditor = ({ match }) => {
         const { params } = match;
         const id = Number(params.id);
         const companyToUpdated = this.store.companies.find((v) => v.id === id);
-        companyToUpdated && this.companyEditorStore.setCompanyToEdit(clone(companyToUpdated));
-        return <ItemEditor store={this.companyEditorStore} onDone={this.handleDone}/>
-    }
+        if (!companyToUpdated) {
+            return null;
+        }
+        this.companyModel = new CompanyEditorStore(clone(companyToUpdated));
+        return <ItemEditor model={this.companyModel} onDone={this.handleDone}/>
+    };
 
     renderNewCompany = () => {
         return <NewItem store={this.store} />
-    }
+    };
 
     handleDone = () => {
-        const updatedCompany = this.companyEditorStore.companyToEdit;
-        this.store.updateCompany(updatedCompany);
-        this.companyEditorStore.purge();
+        if (this.companyModel) {
+            this.store.updateCompany(this.companyModel);
+            this.companyModel.purge();
+        }
     }
 }
