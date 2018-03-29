@@ -29,5 +29,6 @@ export default class CompaniesStore {
         companyToUpdate.ogrn = company.ogrn;
         companyToUpdate.type = company.type;
         companyToUpdate.date = company.date;
+        companyToUpdate.active = company.active;
     }
 }

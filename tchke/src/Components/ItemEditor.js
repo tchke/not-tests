@@ -46,7 +46,7 @@ export default class ItemEditor extends React.Component {
                 <div>
                     <div>Active</div>
                     <div>
-                        <input type='checkbox' value={model.active} onChange={this.handleActiveChange} />
+                        <input type='checkbox' checked={model.active} onChange={this.handleActiveChange} />
                     </div>
                 </div>
                 <button type='submit'>Save</button>
@@ -76,6 +76,6 @@ export default class ItemEditor extends React.Component {
     };
 
     handleActiveChange = (e) => {
-        this.props.model.active = e.target.value;
+        this.props.model.active = e.target.checked;
     };
 }
