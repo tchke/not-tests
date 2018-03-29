@@ -8,6 +8,7 @@ export default class CompanyEditorStore {
         this.ogrn = company.ogrn;
         this.type = company.type;
         this.date = company.date;
+        this.active = company.active;
     }
 
     id = null;
@@ -15,6 +16,7 @@ export default class CompanyEditorStore {
     @observable ogrn = null;
     @observable type = null;
     @observable date = null;
+    @observable active = null;
     @computed
     get momentDate() {
         return moment(this.date);
@@ -27,5 +29,6 @@ export default class CompanyEditorStore {
         this.ogrn = null;
         this.type = null;
         this.date = null;
+        this.active = null;
     }
 }

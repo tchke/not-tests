@@ -43,6 +43,12 @@ export default class ItemEditor extends React.Component {
                         <DatePicker selected={model.momentDate} onChange={this.handleDateChange}/>
                     </div>
                 </div>
+                <div>
+                    <div>Active</div>
+                    <div>
+                        <input type='checkbox' value={model.active} onChange={this.handleActiveChange} />
+                    </div>
+                </div>
                 <button type='submit'>Save</button>
             </form>
         );
@@ -67,5 +73,9 @@ export default class ItemEditor extends React.Component {
 
     handleDateChange = (date) => {
         this.props.model.date = date.format();
+    };
+
+    handleActiveChange = (e) => {
+        this.props.model.active = e.target.value;
     };
 }
