@@ -1,4 +1,5 @@
 import { observable, computed } from 'mobx';
+import moment from 'moment';
 
 export default class Company {
     id = null;
@@ -10,6 +11,10 @@ export default class Company {
 
     constructor(id) {
         this.id = id;
+    }
+
+    @computed get momentDate() {
+        return this.date ? moment(this.date) : null;
     }
 
     @computed get asJson() {
