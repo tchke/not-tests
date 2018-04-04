@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx';
+import {observable, action, computed} from 'mobx';
 
 export default class CompaniesStore {
     counter = 0;
@@ -12,9 +12,9 @@ export default class CompaniesStore {
         return companies.find((v) => v.id === this.currentCompanyId);
     }
 
-    @action 
+    @action
     addCompany(name) {
-        this.companies.push({ id: ++this.counter, name });
+        this.companies.push({id: ++this.counter, name});
     }
 
     @action
@@ -25,10 +25,21 @@ export default class CompaniesStore {
     @action
     updateCompany(company) {
         const companyToUpdate = this.companies.find((v) => v.id === company.id);
-        companyToUpdate.name = company.name;
-        companyToUpdate.ogrn = company.ogrn;
-        companyToUpdate.type = company.type;
-        companyToUpdate.date = company.date;
-        companyToUpdate.active = company.active;
+        if (companyToUpdate) {
+            companyToUpdate.name = company.name;
+            companyToUpdate.ogrn = company.ogrn;
+            companyToUpdate.type = company.type;
+            companyToUpdate.date = company.date;
+            companyToUpdate.active = company.active;
+        } else {
+            this.companies.push({
+                id: company.id,
+                name: company.name,
+                ogrn: company.ogrn,
+                type: company.type,
+                date: company.date,
+                active: company.active
+            });
+        }
     }
 }
