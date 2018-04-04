@@ -26,23 +26,18 @@ export default class CompaniesStore {
     }
 
     @action
-    updateCompany(company) {
-        const companyToUpdate = this.companies.find((v) => v.id === company.id);
-        if (companyToUpdate) {
-            companyToUpdate.name = company.name;
-            companyToUpdate.ogrn = company.ogrn;
-            companyToUpdate.type = company.type;
-            companyToUpdate.date = company.date;
-            companyToUpdate.active = company.active;
-        } else {
-            this.companies.push({
-                id: company.id,
-                name: company.name,
-                ogrn: company.ogrn,
-                type: company.type,
-                date: company.date,
-                active: company.active
-            });
+    updateCompany(companyJson) {
+        let company = this.companies.find((v) => v.id === companyJson.id);
+        if (!company){
+            company = new Company(companyJson.id);
+            this.companies.push(company);
         }
+
+        company.name = companyJson.name;
+        company.ogrn = companyJson.ogrn;
+        company.type = companyJson.type;
+        company.date = companyJson.date;
+        company.active = companyJson.active;
+
     }
 }

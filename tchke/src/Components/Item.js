@@ -15,7 +15,7 @@ export default class Item extends React.Component {
         }
 
         const { model } = this.props;
-
+        console.log(model);
         return (
             <div className='item'>
                 <div>
@@ -39,7 +39,7 @@ export default class Item extends React.Component {
                 <div>
                     <div>Registration Date</div>
                     <div>
-                        {model.momentDate}
+                        {model.date}
                     </div>
                 </div>
                 <div>
@@ -54,8 +54,9 @@ export default class Item extends React.Component {
     }
 
     handleEdit = () => {
+        const { model } = this.props;
         this.setState({
-            redirectTo: '/'
+            redirectTo: `/company/edit/${model.id}`
         });
     }
 }

@@ -10,7 +10,7 @@ mock.onGet('/companies').reply(200, {
             name: 'Company 1',
             ogrn: 'ogrnOfCompany',
             type: 'ooo',
-            date: Date(),
+            date: new Date().toISOString(),
             active: true
         },
         {
@@ -18,7 +18,7 @@ mock.onGet('/companies').reply(200, {
             name: 'Company 2',
             ogrn: 'ogrnOfCompany',
             type: 'ip',
-            date: Date(),
+            date: new Date().toISOString(),
             active: true
         }
     ]

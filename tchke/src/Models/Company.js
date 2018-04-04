@@ -18,7 +18,9 @@ export default class Company {
     }
 
     @computed get momentDate() {
-        return this.date ? moment(this.date) : null;
+        let result = this.date ? moment(this.date) : null;
+        console.log(result);
+        return result;
     }
 
     @computed get asJson() {
