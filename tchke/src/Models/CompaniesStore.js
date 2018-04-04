@@ -2,6 +2,10 @@ import {observable, action} from 'mobx';
 import Company from './Company';
 
 export default class CompaniesStore {
+    constructor(companiesApi) {
+        this.companiesApi = companiesApi;
+        this.loadCompanies();
+    }
     @observable companies = [];
 
     @action
@@ -9,6 +13,16 @@ export default class CompaniesStore {
         const company = new Company(id);
         this.companies.push(company);
         return company;
+    }
+
+    loadCompanies() {
+        this.companiesApi.getCompanies()
+            .then((response) => {
+                const { data: { companies }} = response;
+                companies.forEach(company => {
+                    this.updateCompany(company);
+                });
+            });
     }
 
     @action

@@ -6,13 +6,14 @@ import List from './Components/List';
 import Item from './Components/Item';
 import ItemEditor from './Components/ItemEditor';
 import CompaniesStore from './Models/CompaniesStore';
+import CompaniesApi from './Services/CompanyService';
 import DevTools from 'mobx-react-devtools';
 
 export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.store = new CompaniesStore();
+        this.store = new CompaniesStore(new CompaniesApi());
     }
 
     render() {
