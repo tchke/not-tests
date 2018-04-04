@@ -1,25 +1,14 @@
-import {observable, action, computed} from 'mobx';
+import {observable, action} from 'mobx';
+import Company from './Company';
 
 export default class CompaniesStore {
-    counter = 0;
-
     @observable companies = [];
 
-    @observable currentCompanyId = null;
-
-    @computed
-    get currentCompany() {
-        return companies.find((v) => v.id === this.currentCompanyId);
-    }
-
     @action
-    addCompany(name) {
-        this.companies.push({id: ++this.counter, name});
-    }
-
-    @action
-    setCurrentCompanyId(id) {
-        this.currentCompanyId = id;
+    createCompany(id) {
+        const company = new Company(id);
+        this.companies.push(company);
+        return company;
     }
 
     @action

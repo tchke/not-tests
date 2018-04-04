@@ -7,11 +7,19 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 @observer
 export default class ItemEditor extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            done: false
+        }
+    }
+
     render() {
         const { model } = this.props;
+        const { done } = this.state;
 
-        if (!model.id) {
-            return <Redirect to='/'/>
+        if (done) {
+            return <Redirect to={'/'}/>
         }
 
         return (
@@ -56,6 +64,9 @@ export default class ItemEditor extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        this.setState({
+            done: true
+        });
         this.props.onDone();
     };
 
