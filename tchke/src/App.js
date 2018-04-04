@@ -34,8 +34,9 @@ export default class App extends React.Component {
     };
 
     renderCompany = ({ match }) => {
-        const { params } = match;   
-        return <Item store={this.store} id={params.id} />;
+        const { params: { id } } = match;
+        const company = this.store.companies.find((v) => v.id === id);
+        return <Item model={company} />;
     };
 
     renderCompanyEditor = ({ match }) => {
@@ -47,7 +48,6 @@ export default class App extends React.Component {
     renderNewCompany = () => {
         this.companyModel = this.store.createCompany(uuid.v4());
         return <ItemEditor model={this.companyModel} onDone={this.handleDone}/>
-        //return <NewItem store={this.store} />
     };
 
     handleDone = () => {

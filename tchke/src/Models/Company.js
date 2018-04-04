@@ -11,6 +11,10 @@ export default class Company {
 
     constructor(id) {
         this.id = id;
+
+        // this.saveHandler = reaction(
+        //     () =>
+        // );
     }
 
     @computed get momentDate() {
