@@ -25,13 +25,9 @@ export default class List extends React.Component {
         return (
             <li key={item.id}>
                 <Link to={`/company/${item.id}`}>{item.name}</Link>
+                &nbsp;
                 <Link to={`/company/edit/${item.id}`}>Edit</Link>
             </li>
         );
-    }
-
-    handleAddClick = () => {
-        const { store } = this.props;
-        store.addCompany();
     }
 }
