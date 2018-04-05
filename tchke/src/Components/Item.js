@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import CompanyView from './CompanyView';
+import CompanyCard from './CompanyCard';
 
 export default class Item extends React.Component {
     constructor(props) {
@@ -19,7 +19,7 @@ export default class Item extends React.Component {
 
         return (
             <div className='item'>
-                <CompanyView model={model}/>
+                <CompanyCard model={model}/>
                 <button type='button' onClick={this.handleEdit}>Edit</button>
             </div>
         );

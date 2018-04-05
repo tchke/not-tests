@@ -2,8 +2,8 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import { Redirect } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
-
 import 'react-datepicker/dist/react-datepicker.css';
+import CompanyCard from './CompanyCard';
 
 @observer
 export default class ItemEditor extends React.Component {
@@ -18,47 +18,50 @@ export default class ItemEditor extends React.Component {
         const { model } = this.props;
         const { done } = this.state;
 
-        if (done) {
-            return <Redirect to={'/'}/>
-        }
+        // if (done) {
+        //     return <Redirect to={'/'}/>
+        // }
 
         return (
-            <form onSubmit={this.handleSubmit}>
-                <div>
-                    <div>Name</div>
+            <div>
+                <form onSubmit={this.handleSubmit}>
                     <div>
-                        <input type='text' value={model.name} onChange={this.handleNameChange} />
+                        <div>Name</div>
+                        <div>
+                            <input type='text' value={model.name} onChange={this.handleNameChange} />
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <div>OGRN</div>
                     <div>
-                        <input type='text' value={model.ogrn} onChange={this.handleOgrnChange} />
+                        <div>OGRN</div>
+                        <div>
+                            <input type='text' value={model.ogrn} onChange={this.handleOgrnChange} />
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <div>Type</div>
                     <div>
-                        <select onChange={this.handleTypeChange} value={model.type}>
-                            <option key='ooo' value='ooo'>ooo</option>
-                            <option key='ip' value='ip'>ip</option>
-                        </select>
+                        <div>Type</div>
+                        <div>
+                            <select onChange={this.handleTypeChange} value={model.type}>
+                                <option key='ooo' value='ooo'>ooo</option>
+                                <option key='ip' value='ip'>ip</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <div>Registration Date</div>
                     <div>
-                        <DatePicker selected={model.momentDate} onChange={this.handleDateChange}/>
+                        <div>Registration Date</div>
+                        <div>
+                            <DatePicker selected={model.momentDate} onChange={this.handleDateChange}/>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <div>Active</div>
                     <div>
-                        <input type='checkbox' checked={model.active} onChange={this.handleActiveChange} />
+                        <div>Active</div>
+                        <div>
+                            <input type='checkbox' checked={model.active} onChange={this.handleActiveChange} />
+                        </div>
                     </div>
-                </div>
-                <button type='submit'>Save</button>
-            </form>
+                    <button type='submit'>Save</button>
+                </form>
+                {done && <CompanyCard model={model}/>}
+            </div>
         );
     }
 

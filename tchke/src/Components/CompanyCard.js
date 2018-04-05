@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function CompanyView(props) {
+export default function CompanyCard(props) {
 
     const {model} = props;
 
